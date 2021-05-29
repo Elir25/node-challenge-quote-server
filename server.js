@@ -27,6 +27,15 @@ app.get("/quotes/random", function (request, response) {
   response.send(pickFromArray(quotes));
 });
 
+app.get("/quotes/search", function (request, response) {
+  let searchQuery = request.query.term;
+  response.send(findWord(quotes, searchQuery)); 
+});
+
+function findWord(arr, searchQ) {
+  return arr.filter((item) => item.quote.toLocaleUpperCase().includes(searchQ.toLocaleUpperCase()))
+}
+
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
@@ -43,3 +52,6 @@ let port = 5000;
 app.listen( port, function () {
   console.log("Your app is listening on port " + port);
 });
+
+
+//2:37
