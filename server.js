@@ -1,9 +1,11 @@
-const { response } = require("express");
+const { response, request } = require("express");
 // server.js
 // This is where your node app starts
 
 //load the 'express' module which makes writing webservers easy
 const express = require("express");
+
+const sample = require('lodash/sample');
 const app = express();
 
 //load the quotes JSON
@@ -24,7 +26,7 @@ app.get("/quotes", function (request, response) {
 });
 
 app.get("/quotes/random", function (request, response) {
-  response.send(pickFromArray(quotes));
+  response.send(sample(quotes));
 });
 
 app.get("/quotes/search", function (request, response) {
@@ -42,9 +44,10 @@ function findWord(arr, searchQ) {
 //example: pickFromArray([1,2,3,4]), or
 //example: pickFromArray(myContactsArray)
 //
-function pickFromArray(arr) {
+
+/*function pickFromArray(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
-}
+}*/
 
 //Start our server so that it listens for HTTP requests!
 let port = 5000;
